@@ -7,6 +7,8 @@ import {authenticate, upload } from "../../midllewars/index.js";
 const authRouter = express.Router();
 
 authRouter.post('/register', validateBody(usersSchemas.usersSignupSigninSchema), authController.signup);
+authRouter.get('/verify/:verificationCode', authController.verify);
+authRouter.post('/verify', validateBody(usersSchemas.userEmailSchema), authController.resendVerifyEmail);
 authRouter.post('/login', validateBody(usersSchemas.usersSignupSigninSchema), authController.signin);
 authRouter.get('/current', authenticate, authController.getCurrent);
 authRouter.post('/logout', authenticate, authController.signout);
